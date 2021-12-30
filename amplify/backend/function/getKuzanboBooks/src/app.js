@@ -6,9 +6,7 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-
-
-
+var axios = require('axios')
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
@@ -27,9 +25,68 @@ app.use(function(req, res, next) {
 
 
 /**********************
- * Example get method *
+ * get method *
  **********************/
 
+// ユーザ存在確認
+app.get('/books/login', function(req, res) {
+  const apitoken = '9fYEbPqCHWvxrscrkEKElhWg5YV2s5ixtWR9SNuv';
+  const appid = 12;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/records.json`;
+    
+  req.query.app=appid;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+  axios.get(url, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
+
+// 予約情報 全件取得
+app.get('/books', function(req, res) {
+  const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
+  const appid = 9;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/records.json`;
+    
+  req.query.app=appid;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+  axios.get(url, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
 app.get('/books', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
