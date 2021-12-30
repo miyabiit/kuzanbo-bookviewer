@@ -1,5 +1,5 @@
 import { memo, ChangeEvent, useState } from "react";
-import { Box, Flex, Heading, Input, Stack } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
 
@@ -13,6 +13,7 @@ export const Login = memo(() => {
   const onChangeUserId = e => setUserId(e.targt.value);
   */
   return (
+    <>
     <Flex alignItems="center" justifyContent="center" height="100vh">
       <Box
         bg="white"
@@ -29,8 +30,6 @@ export const Login = memo(() => {
           spacing={6} py={4} px={10}>
           <Input
             placeholder="User Mail"
-            //value={userId}
-            //onChange={onChangeUserId}
           />
           <PrimaryButton
             isFullWidth
@@ -40,5 +39,6 @@ export const Login = memo(() => {
         </Stack>
       </Box>
     </Flex>
+    </>
   )
 });
