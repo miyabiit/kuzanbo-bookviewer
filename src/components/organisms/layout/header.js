@@ -21,6 +21,7 @@ export const Header = memo(() => {
   const onClickMenu = useCallback(() => navigate("/menus"), []);
   const onClickGuests = useCallback(() => navigate("/guests"), []);
   const onClickGuest = useCallback(() => navigate("/guest"), []);
+  const onClickLogiout = useCallback(() => navigate("/"), []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -52,6 +53,9 @@ export const Header = memo(() => {
           <Box>
             <Link onClick={onClickGuest}>詳細</Link>
           </Box>
+          <Box>
+            <Link onClick={onClickLogiout}>ログアウト</Link>
+          </Box>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
@@ -67,6 +71,9 @@ export const Header = memo(() => {
               </Button>
               <Button onClick={onClickGuest} w="100%">
                 ゲスト
+              </Button>
+              <Button onClick={onClickLogiout} w="100%">
+                ログアウト
               </Button>
             </DrawerBody>
           </DrawerContent>

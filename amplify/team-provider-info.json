@@ -10,6 +10,14 @@
       "StackName": "amplify-kuzanbobookviewer-dev-21630",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:392248044563:stack/amplify-kuzanbobookviewer-dev-21630/81ea0f80-6916-11ec-968e-0a00fc727485",
       "AmplifyAppId": "dvx8585wij7et"
+    },
+    "categories": {
+      "function": {
+        "getKuzanboBooks": {
+          "deploymentBucketName": "amplify-kuzanbobookviewer-dev-21630-deployment",
+          "s3Key": "amplify-builds/getKuzanboBooks-4a4d5a5368374a523942-build.zip"
+        }
+      }
     }
   }
 }
