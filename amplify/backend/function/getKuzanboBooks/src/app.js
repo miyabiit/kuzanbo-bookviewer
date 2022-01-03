@@ -29,13 +29,15 @@ app.use(function(req, res, next) {
  **********************/
 
 // ユーザ存在確認
-app.get('/books/login', function(req, res) {
+app.get('/books/login/:id', function(req, res) {
   const apitoken = '9fYEbPqCHWvxrscrkEKElhWg5YV2s5ixtWR9SNuv';
   const appid = 12;
   const domain = '0vnjl1ng82s3';
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
-    
+  
+  console.log("error:",req.params.id);
   req.query.app=appid;
+  req.query.query=`user_id="${req.params.id}"`;
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -43,6 +45,7 @@ app.get('/books/login', function(req, res) {
     },
     data: req.query,
   }
+  console.log("get query", req.query);
   axios.get(url, config)
   .then(response => {
     res.json({
@@ -51,6 +54,7 @@ app.get('/books/login', function(req, res) {
     })
   })
   .catch(error => {
+    console.log("res error", error);
     res.json({
       success: false,
       error
@@ -66,6 +70,7 @@ app.get('/books', function(req, res) {
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
     
   req.query.app=appid;
+  req.query.query=req.query;
   const config = {
     headers: {
       'Content-Type': 'application/json',

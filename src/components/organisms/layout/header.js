@@ -50,10 +50,10 @@ export const Header = memo(() => {
           <Box pr={4}>
             <Link onClick={onClickGuests}>ゲスト</Link>
           </Box>
-          <Box>
+          <Box pr={4}>
             <Link onClick={onClickGuest}>詳細</Link>
           </Box>
-          <Box>
+          <Box pr={4}>
             <Link onClick={onClickLogiout}>ログアウト</Link>
           </Box>
         </Flex>

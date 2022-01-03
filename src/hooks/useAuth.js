@@ -16,11 +16,12 @@ export const useAuth = () => {
   
   const login = useCallback((id) => {
     setLoading(true);
-    API.get('kuzanboapi',`/books/login?query="user_id=${id}"`)
+    API.get('kuzanboapi',`/books/login/${id}`)
     .then(async res => {
-      alert(res.success);
-      alert(JSON.stringify(res.data));
-      if(res.success){
+      //data: { records: [], totalCount: null }
+      console.log("res:",res);
+      console.log("count", res.data.records);
+      if(res.success && res.data.records.length > 0){
         showMessage({
           title: "ログインしました",
           status: "success"
@@ -30,8 +31,8 @@ export const useAuth = () => {
       }else{
         showMessage({
           title: "ユーザが存在しません",
-          status: "error"
-        });
+          status: "warning"
+        })
         navigate("/");
         setLoading(false);
       }
