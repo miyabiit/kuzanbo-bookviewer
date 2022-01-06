@@ -15,7 +15,7 @@
       "function": {
         "getKuzanboBooks": {
           "deploymentBucketName": "amplify-kuzanbobookviewer-dev-21630-deployment",
-          "s3Key": "amplify-builds/getKuzanboBooks-4353495274722f315a43-build.zip"
+          "s3Key": "amplify-builds/getKuzanboBooks-722f6b30304f4b414779-build.zip"
         }
       }
     }

@@ -8,22 +8,27 @@ import { useMessage } from "./useMessage";
 
 Amplify.configure(config);
 
-export const useReserves = (dateString) => {
+export const useReserves = () => {
   const { showMessage } = useMessage();
   const [loading, setLoading] = useState(false);
   const [reserves, setReserves ] = useState([]);
   
-  const getReserves = useCallback(() => {
+  const getReserves = useCallback((dateString) => {
       setLoading(true);
-      API.get("kuzanboapi","/books/${dateString}")
+      API.get("kuzanboapi",`/books/${dateString}`)
       .then(async res => {
-          if(res.success && res.data.records.length > 0){
+          alert(JSON.stringify(res));
+          if(res.success){
+            if(res.data.records.length > 0){
               setReserves(res.data.records);
+            }else{
+              showMessage({title:"予約がありません", status:"info"});
+            }
           }else{
-              showMessage({title:"予約がありません。"})
+            showMessage({title:"予約取得に失敗しました", status:"error"});
           }
       })
-      .catch(() => showMessage({title:"予約取得に失敗しました", status:"error"}))
+      .catch(() => showMessage({title:"通信に失敗しました", status:"error"}))
       .finally(() => setLoading(false));
   },[]);
   return { getReserves, loading, reserves };

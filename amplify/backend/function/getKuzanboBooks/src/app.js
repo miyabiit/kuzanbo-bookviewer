@@ -68,9 +68,9 @@ app.get('/books/:date', function(req, res) {
   const appid = 9;
   const domain = '0vnjl1ng82s3';
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
-    
+  
   req.query.app=appid;
-  req.query.query=`宿泊日>="${req.params.id}"`;
+  req.query.query=`宿泊日>="${req.params.date}"`;
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -91,15 +91,6 @@ app.get('/books/:date', function(req, res) {
       error
     })
   });
-});
-app.get('/books', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
-});
-
-app.get('/books/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
 });
 
 /****************************
