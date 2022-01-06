@@ -63,14 +63,14 @@ app.get('/books/login/:id', function(req, res) {
 });
 
 // 予約情報 全件取得
-app.get('/books', function(req, res) {
+app.get('/books/:date', function(req, res) {
   const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
   const appid = 9;
   const domain = '0vnjl1ng82s3';
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
     
   req.query.app=appid;
-  req.query.query=req.query;
+  req.query.query=`宿泊日>="${req.params.id}"`;
   const config = {
     headers: {
       'Content-Type': 'application/json',

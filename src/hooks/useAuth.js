@@ -19,8 +19,6 @@ export const useAuth = () => {
     API.get('kuzanboapi',`/books/login/${id}`)
     .then(async res => {
       //data: { records: [], totalCount: null }
-      console.log("res:",res);
-      console.log("count", res.data.records);
       if(res.success && res.data.records.length > 0){
         showMessage({
           title: "ログインしました",

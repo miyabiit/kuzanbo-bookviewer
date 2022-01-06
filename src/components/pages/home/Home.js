@@ -1,5 +1,14 @@
-import { memo } from "react";
+import { memo, useCallback, useEffect } from "react";
+import { useReserves } from "../../../hooks/useReserves";
 
 export const Home = memo(() => {
-  return <p>Home page</p>;
+  const { getReserves, loading, reserves } = useReserves();
+  
+  useEffect(() => getReserves(), [getReserves]);
+  
+  return(
+    <>
+      <h1>HOME</h1>
+    </>
+  )
 });
