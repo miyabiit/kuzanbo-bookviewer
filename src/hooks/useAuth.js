@@ -16,7 +16,7 @@ export const useAuth = () => {
   
   const login = useCallback((id) => {
     setLoading(true);
-    API.get('kuzanboapi',`/books/${id}`)
+    API.get('kuzanboapi',`/books/login/${id}`)
     .then(async res => {
       //data: { records: [], totalCount: null }
       if(res.success && res.data.records.length > 0){
