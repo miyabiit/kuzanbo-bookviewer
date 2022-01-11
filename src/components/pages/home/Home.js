@@ -10,11 +10,18 @@ import {
 } from '@chakra-ui/react';
 
 import { useReserves } from "../../../hooks/useReserves";
+import { useReserveSummary } from "../../../hooks/useReserveSummary";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves } = useReserves();
+  const { onReserveSummary, reserveSummary } = useReserveSummary();
   
-  useEffect(() => getReserves("2021-09-18"), [getReserves]);
+  useEffect(() => {
+    getReserves("2021-09-18");
+    onReserveSummary({startday:"2021-09-18",reserves: reserves});
+    alert(JSON.stringify(reserveSummary));
+  }, [getReserves,onReserveSummary]);
+  //alert(reserves.length);
 
   return(
     <>

@@ -17,9 +17,9 @@ export const useReserves = () => {
       setLoading(true);
       API.get("kuzanboapi",`/books/${dateString}`)
       .then(async res => {
-          alert(JSON.stringify(res));
           if(res.success){
             if(res.data.records.length > 0){
+              //alert(JSON.stringify(res.data.records[0].チェックイン.value));
               setReserves(res.data.records);
             }else{
               showMessage({title:"予約がありません", status:"info"});
