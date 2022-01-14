@@ -30,20 +30,17 @@ export const useReserves = () => {
                 targets.push({"date":new Date(start), "reserves": []});
               };
               let date1 = new Date();
-              reserves.map(reserve => {
+              res.data.records.map(reserve => {
                 targets.map(target => {
                   date1 = new Date(reserve.チェックイン.value);
-                  //console.log("1",target.date.toDateString(),target.date.getTime());
-                  //console.log("2",date1.toDateString(),date1.getTime());
                   if(target.date.toDateString() == date1.toDateString()){
-                    console.log("date1:",date1);
-                    target.reserves.push(reserve);
+                    target.reserves.push({...reserve});
                   };
                 });
               });
-              setReserveSummary(targets);            
+              setReserveSummary([...targets]);          
             }else{
-              showMessage({title:"予約がありません", status:"info"});
+              showMessage({title:"予約がありません", status:"info"})
             }
           }else{
             showMessage({title:"予約取得に失敗しました", status:"error"});

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect, useLayoutEffect } from "react";
 import {
   Box,
   Flex,
@@ -19,7 +19,7 @@ import { useReserveSummary } from "../../../hooks/useReserveSummary";
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
   useEffect(() => {
-    getReserves("2021-09-17");
+    getReserves("2021-09-18");
   },[getReserves]);
   
   return(
@@ -32,6 +32,9 @@ export const Home = memo(() => {
               <AccordionButton>
                 <Box flex='1' textAlign='left'>
                   予約数:{obj.reserves.length}
+                </Box>
+                <Box flex='1' textAlign='left'>
+                  日付:{obj.date.toDateString()}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
