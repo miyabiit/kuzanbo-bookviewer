@@ -14,7 +14,6 @@ import {
 } from '@chakra-ui/react';
 
 import { useReserves } from "../../../hooks/useReserves";
-import { useReserveSummary } from "../../../hooks/useReserveSummary";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
