@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useLayoutEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -10,7 +10,9 @@ import {
   Center,
   Spinner,
   Wrap,
-  WrapItem
+  WrapItem,
+  VStack,
+  StackDivider
 } from '@chakra-ui/react';
 
 import { useReserves } from "../../../hooks/useReserves";
@@ -30,19 +32,26 @@ export const Home = memo(() => {
             <h2>
               <AccordionButton>
                 <Box flex='1' textAlign='left'>
-                  予約数:{obj.reserves.length}
+                  日付:{obj.date.toDateString()}
                 </Box>
                 <Box flex='1' textAlign='left'>
-                  日付:{obj.date.toDateString()}
+                  予約数:{obj.reserves.length}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.
+              <VStack
+                divider={<StackDivider/>}
+                spacing={4}
+                align='stretch'
+              >
+                {obj.reserves.map((reserve,index) => (
+                  <Box h='20px' key={index}>
+                    {reserve.宿泊者名.value}
+                  </Box>
+                ))}
+              </VStack>
             </AccordionPanel>
           </AccordionItem>
         ))}
@@ -50,42 +59,3 @@ export const Home = memo(() => {
     </>
   )
 });
-        
-{/*
-<Accordion>
-  <AccordionItem>
-    <h2>
-      <AccordionButton>
-        <Box flex='1' textAlign='left'>
-          Section 1 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem>
-
-  <AccordionItem>
-    <h2>
-      <AccordionButton>
-        <Box flex='1' textAlign='left'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem>
-</Accordion>
-      <h1>HOME</h1>
-*/}
