@@ -16,9 +16,9 @@ export const ReserveDetailModal = memo(props => {
   const {isOpen, onClose, reserve } = props;
   
   const [name, setName] = useState("");
-    
+  console.log("reserve:",reserve);
   useEffect(() => {
-    setName(reserve?.宿泊者.value ?? "");
+    setName(reserve.宿泊者名?.value ?? "");
   }, [reserve]);
 
   return(

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -26,6 +26,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useReserves } from "../../../hooks/useReserves";
+import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
@@ -34,11 +35,13 @@ export const Home = memo(() => {
   },[getReserves]);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectReserve, setSelectReserve] = useState([]);
+
   const onClickReserve = useCallback(
     (reserve) => {
-      
-    }
-  );
+      setSelectReserve(reserve);
+      onOpen();
+  },[onClickReserve]);
   
   return(
     <>
@@ -70,7 +73,7 @@ export const Home = memo(() => {
                     </Box>
                     <Spacer />
                     <Box>
-                      <Button onClick={onOpen} colorScheme='teal' mr='1'>
+                      <Button onClick={() => onClickReserve(reserve)} colorScheme='teal' mr='1'>
                         詳細
                       </Button>
                     </Box>
@@ -81,25 +84,11 @@ export const Home = memo(() => {
           </AccordionItem>
         ))}
       </Accordion>
-      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>予約詳細</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            詳細<br/>
-            詳細<br/>
-            詳細<br/>
-            詳細<br/>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ReserveDetailModal
+        isOpen = {isOpen}
+        onClose = {onClose}
+        reserve = {selectReserve}
+      />
     </>
   )
 });
