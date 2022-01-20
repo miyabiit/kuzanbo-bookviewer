@@ -30,13 +30,32 @@ export const useReserves = () => {
                 targets.push({"date":new Date(start), "reserves": []});
               };
               let date1 = new Date();
+              let dateCheckin = new Date();
+              let dateCheckout = new Date();
+              let dateSa = 0;
               res.data.records.map(reserve => {
+                dateCheckin = new Date(reserve.チェックイン.value.replace(/-/g,"/"));
+                dateCheckout = new Date(reserve.チェックアウト.value.replace(/-/g, "/"));
+                dateSa = (dateCheckout - dateCheckin)/86400000;
                 targets.map(target => {
-                  date1 = new Date(reserve.チェックイン.value);
-                  if(target.date.toDateString() == date1.toDateString()){
+                  if(target.date.toDateString() == dateCheckin.toDateString()){
+                    reserve["status"] = "CHECKIN";
                     target.reserves.push({...reserve});
-                  };
+                  }
                 });
+                for(let i=0;i<dateSa; i++){
+                  dateCheckin.setDate(dateCheckin.getDate()+1);
+                  targets.map(target => {
+                    if(target.date.toDateString() == dateCheckin.toDateString()){
+                      if(i == (dateSa - 1)){
+                        reserve["status"] = "CHECKOUT"  
+                      }else{
+                        reserve["status"] = "STAY"  
+                      }
+                      target.reserves.push({...reserve});
+                    }
+                  });
+                };
               });
               setReserveSummary([...targets]);          
             }else{

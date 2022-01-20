@@ -71,6 +71,12 @@ export const Home = memo(() => {
                     <Box p='1'>
                       {reserve.宿泊者名.value}
                     </Box>
+                    <Box p='1'>
+                      {reserve.status}
+                    </Box>
+                    <Box p='1'>
+                      部屋{reserve.宿泊タイプ.value}
+                    </Box>
                     <Spacer />
                     <Box>
                       <Button onClick={() => onClickReserve(reserve)} colorScheme='teal' mr='1'>
