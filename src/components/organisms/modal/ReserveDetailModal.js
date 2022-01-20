@@ -8,6 +8,11 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
 } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
@@ -21,6 +26,13 @@ export const ReserveDetailModal = memo(props => {
     setName(reserve.宿泊者名?.value ?? "");
   }, [reserve]);
 
+  const list = [];
+  let obj = {};
+  for(const key in reserve){
+    obj = reserve[key];
+    list.push(<ListItem key={key}>{key}:{JSON.stringify(obj.value)}</ListItem>)
+  };
+  
   return(
     <Modal
       isOpen={isOpen}
@@ -34,6 +46,9 @@ export const ReserveDetailModal = memo(props => {
         <ModalCloseButton />
         <ModalBody mx={6}>
         宿泊者：{name}
+        <UnorderedList>
+          {list}
+        </UnorderedList>
         </ModalBody>
       </ModalContent>
     </Modal>
