@@ -24,10 +24,10 @@ export const useReserves = () => {
               let dateArr = dateString.split("-");
               let start = new Date(dateArr[0],dateArr[1]-1,dateArr[2]);
               let targets = [];
-              targets.push({"date":new Date(start), "reserves": []});
+              targets.push({"date":new Date(start), "totalMale": 0, "reserves": []});
               for(let n = 0; n < 6; n++){
                 start.setDate(start.getDate()+1);
-                targets.push({"date":new Date(start), "reserves": []});
+                targets.push({"date":new Date(start), "totalMale": 0, "reserves": []});
               };
               let date1 = new Date();
               let dateCheckin = new Date();
@@ -41,6 +41,8 @@ export const useReserves = () => {
                   if(target.date.toDateString() == dateCheckin.toDateString()){
                     reserve["status"] = "CHECKIN";
                     target.reserves.push({...reserve});
+                    //console.log("1: ",Number(reserve.男.value));
+                    target.totalMale += parseInt(reserve.男.value,10);
                   }
                 });
                 for(let i=0;i<dateSa; i++){
@@ -53,6 +55,8 @@ export const useReserves = () => {
                         reserve["status"] = "STAY"  
                       }
                       target.reserves.push({...reserve});
+                      //console.log("2: ",Number(reserve.男.value));
+                      //target.totalMale += parseInt(reserve.男.value,10);
                     }
                   });
                 };

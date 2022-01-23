@@ -57,6 +57,9 @@ export const Home = memo(() => {
                 <Box flex='1' textAlign='left'>
                   予約数:{obj.reserves.length}
                 </Box>
+                <Box flex='1' textAlign='left'>
+                  男性:{obj.totalMale}
+                </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
