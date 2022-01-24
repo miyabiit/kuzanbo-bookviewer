@@ -41,7 +41,7 @@ export const useReserves = () => {
                   if(target.date.toDateString() == dateCheckin.toDateString()){
                     reserve["status"] = "CHECKIN";
                     target.reserves.push({...reserve});
-                    //console.log("1: ",Number(reserve.男.value));
+                    if(reserve.男.value == "") reserve.男.value = "0";
                     target.totalMale += parseInt(reserve.男.value,10);
                   }
                 });
@@ -55,8 +55,8 @@ export const useReserves = () => {
                         reserve["status"] = "STAY"  
                       }
                       target.reserves.push({...reserve});
-                      //console.log("2: ",Number(reserve.男.value));
-                      //target.totalMale += parseInt(reserve.男.value,10);
+                      if(reserve.男.value == "") reserve.男.value = "0";
+                      target.totalMale += parseInt(reserve.男.value,10);
                     }
                   });
                 };

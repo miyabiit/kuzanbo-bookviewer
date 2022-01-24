@@ -27,12 +27,23 @@ import {
 
 import { useReserves } from "../../../hooks/useReserves";
 import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
+import { DatePicker } from "chakra-ui-date-input";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
+  
+   const formatDate = (dt) => {
+    var y = dt.getFullYear();
+    var m = ('00' + (dt.getMonth()+1)).slice(-2);
+    var d = ('00' + dt.getDate()).slice(-2);
+    return (y + '-' + m + '-' + d);
+  };
+  
+  const [startDate, setStartDate] = useState(formatDate(new Date()));
+  
   useEffect(() => {
-    getReserves("2021-09-18");
-  },[getReserves]);
+    getReserves(startDate);
+  },[getReserves,startDate]);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectReserve, setSelectReserve] = useState([]);
@@ -45,7 +56,15 @@ export const Home = memo(() => {
   
   return(
     <>
-      <h2>HOME:{reserves.length}</h2>
+      <div>
+      <DatePicker
+        placeholder="Date picker placeholder"
+        name="pickedDate"
+        dateFormat="YYYY-MM-DD"
+        //onChange={(pickedDate) => onChangeDate(pickedDate)}
+        onChange={(pickedDate) => setStartDate(pickedDate)}
+      />
+      </div>
       <Accordion>
         {reserveSummary.map((obj,index) => (
           <AccordionItem key={index}>
