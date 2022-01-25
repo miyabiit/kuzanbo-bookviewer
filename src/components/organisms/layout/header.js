@@ -24,7 +24,7 @@ export const Header = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Flex as="nav" bg="cyan.500" color="gray.50" aling="center">
+      <Flex as="nav" bg="cyan.500" color="gray.50" align="center">
         <Flex
           align="center"
           as="a"

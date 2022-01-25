@@ -7,7 +7,6 @@ export const MenuIconButton = (props) => {
     <IconButton
       size="sm"
       icon={<HamburgerIcon />}
-      p="4"
       variant="unstyled"
       //display={{ base: "block", md: "none" }}
       display={{ base: "block" }}
