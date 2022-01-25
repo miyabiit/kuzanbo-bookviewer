@@ -65,7 +65,7 @@ export const Home = memo(() => {
         onChange={(pickedDate) => setStartDate(pickedDate)}
       />
       </div>
-      <Accordion>
+      <Accordion　allowMultiple>
         {reserveSummary.map((obj,index) => (
           <AccordionItem key={index}>
             <h2>

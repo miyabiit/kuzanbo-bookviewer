@@ -19,8 +19,6 @@ export const Header = memo(() => {
   const navigate = useNavigate();
   const onClickHome = useCallback(() => navigate("/home"), []);
   const onClickMenu = useCallback(() => navigate("/menus"), []);
-  const onClickGuests = useCallback(() => navigate("/guests"), []);
-  const onClickGuest = useCallback(() => navigate("/guest"), []);
   const onClickLogiout = useCallback(() => navigate("/"), []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,7 +32,7 @@ export const Header = memo(() => {
           _hover={{ cursor: "pointer" }}
           onClick={onClickHome}
         >
-          <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
+          <Heading as="h1" p={4} fontSize={{ base: "md", md: "lg" }}>
             KUZANBO
           </Heading>
         </Flex>
@@ -44,16 +42,13 @@ export const Header = memo(() => {
           display={{ base: "none", md: "flex" }}
           flexGrow={2}
         >
-          <Box pr={4}>
+          <Box p={4}>
+            <Link onClick={onClickHome}>予約</Link>
+          </Box>
+          <Box p={4}>
             <Link onClick={onClickMenu}>食事</Link>
           </Box>
-          <Box pr={4}>
-            <Link onClick={onClickGuests}>ゲスト</Link>
-          </Box>
-          <Box pr={4}>
-            <Link onClick={onClickGuest}>詳細</Link>
-          </Box>
-          <Box pr={4}>
+          <Box p={4}>
             <Link onClick={onClickLogiout}>ログアウト</Link>
           </Box>
         </Flex>
@@ -64,13 +59,10 @@ export const Header = memo(() => {
           <DrawerContent>
             <DrawerBody p={0} bg="gray.100">
               <Button onClick={onClickHome} w="100%">
-                HOME
+                予約
               </Button>
               <Button onClick={onClickMenu} w="100%">
                 食事
-              </Button>
-              <Button onClick={onClickGuest} w="100%">
-                ゲスト
               </Button>
               <Button onClick={onClickLogiout} w="100%">
                 ログアウト
