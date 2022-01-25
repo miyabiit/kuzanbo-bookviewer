@@ -58,7 +58,7 @@ export const Home = memo(() => {
     <>
       <div>
       <DatePicker
-        placeholder="Date picker placeholder"
+        placeholder={startDate}
         name="pickedDate"
         dateFormat="YYYY-MM-DD"
         //onChange={(pickedDate) => onChangeDate(pickedDate)}

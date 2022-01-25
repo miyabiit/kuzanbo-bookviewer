@@ -6154,10 +6154,9 @@ case-sensitive-paths-webpack-plugin@2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.3.0.tgz#23ac613cc9a856e4f88ff8bb73bbb5e989825cf7"
   integrity sha512-/4YgnZS8y1UXXmC02xD5rRrBEu6T5ub+mQHLNRj0fzTRbgdBYhsNo2V5EqwgqrExjxsjtF/OpAKAMkKsxbD5XQ==
 
-chakra-ui-date-input@^1.0.0:
+"chakra-ui-date-input@git+https://github.com/miyabiit/chakra-ui-date-input#main":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/chakra-ui-date-input/-/chakra-ui-date-input-1.0.0.tgz#c9ec6a596b78cdecdb0bf57e52a79f30da09770c"
-  integrity sha512-xswSbNNBN+smgPsaP5JVGqhG8XVC9QA6JerdpUVN7CF6vWXHhp+od2enjp0S3nWP059+hljvtkZ2xfy1CJBcfQ==
+  resolved "git+https://github.com/miyabiit/chakra-ui-date-input#0835ff40aa4ba57c4f6afa9a1074fc9444ce8106"
   dependencies:
     "@chakra-ui/icons" "^1.1.1"
     "@chakra-ui/react" "^1.7.3"
