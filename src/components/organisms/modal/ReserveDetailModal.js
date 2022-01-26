@@ -13,6 +13,7 @@ import {
   Stack,
   Flex,
   Box,
+  Checkbox,
   useDisclosure,
   List,
   ListItem,
@@ -28,10 +29,12 @@ export const ReserveDetailModal = memo(props => {
   
   const [name, setName] = useState("");
   const [villa, setVilla] = useState("未決定");
+  const [diamond, setDiamond] = useState(false);
   
   useEffect(() => {
     setName(reserve.宿泊者名?.value ?? "");
     setVilla(reserve.宿泊タイプ?.value ?? "未決定");
+    setDiamond((reserve.ダイヤモンド会員?.value[0] ? true : false));
   }, [reserve]);
   
   const onChangeVilla = (e) => setVilla(e.target.value);
@@ -58,31 +61,31 @@ export const ReserveDetailModal = memo(props => {
       <ModalContent pb={2}>
         <ModalHeader>予約詳細</ModalHeader>
         <ModalCloseButton />
-        <ModalBody mx={6}>
+        <ModalBody mx={1}>
           <Stack spacing={4}>
             <FormControl>
               <Flex>
-              <Box pr={2}>
-              <FormLabel>予約番号</FormLabel>
-              <Input
-                value={reserve.宿泊者名?.value ?? "不明"}
-                isReadOnly={!isAdmin}
-              />
-              </Box>
-              <Box pl={2}>
-              <FormLabel>ダイアモンド会員</FormLabel>
-              <Input
-                value={reserve.宿泊者名?.value ?? "test"}
-                isReadOnly={!isAdmin}
-              />
-              </Box>
+                <Box pr={2}>
+                  <FormLabel>予約番号</FormLabel>
+                  <Input
+                    value={reserve.宿泊者名?.value ?? "不明"}
+                    isReadOnly={!isAdmin}
+                  />
+                </Box>
+                <Box pl={2}>
+                  <FormLabel>ダイヤモンド会員</FormLabel>
+                  <Checkbox 
+                    isChecked={ diamond }
+                    isReadOnly={!isAdmin}
+                  />
+                </Box>
               </Flex>
               <Box pt={2}>
-              <FormLabel>宿泊者名</FormLabel>
-              <Input
-                value={reserve.宿泊者名?.value ?? "test"}
-                isReadOnly={!isAdmin}
-              />
+                <FormLabel>宿泊者名</FormLabel>
+                <Input
+                  value={reserve.宿泊者名?.value ?? ""}
+                  isReadOnly={!isAdmin}
+                />
               </Box>
             </FormControl>
           </Stack>
