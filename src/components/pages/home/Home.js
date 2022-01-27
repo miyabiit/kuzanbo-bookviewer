@@ -60,7 +60,7 @@ export const Home = memo(() => {
           <AccordionItem key={index}>
             <h2>
               <AccordionButton>
-                <ReserveSummaryRaw  summary={obj} />
+                <ReserveSummaryRaw summary={obj} />
                 <AccordionIcon />
               </AccordionButton>
             </h2>
