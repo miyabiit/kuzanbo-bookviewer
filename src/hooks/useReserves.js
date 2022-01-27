@@ -24,10 +24,23 @@ export const useReserves = () => {
               let dateArr = dateString.split("-");
               let start = new Date(dateArr[0],dateArr[1]-1,dateArr[2]);
               let targets = [];
-              targets.push({"date":new Date(start), "totalMale": 0, "reserves": []});
+              targets.push({
+                "date":new Date(start),
+                "totalMale": 0,
+                "totalFemale":0,
+                "totalGuest":0,
+                "totalDog":0,
+                "reserves": []
+              });
               for(let n = 0; n < 6; n++){
                 start.setDate(start.getDate()+1);
-                targets.push({"date":new Date(start), "totalMale": 0, "reserves": []});
+                targets.push({"date":new Date(start),
+                  "totalMale": 0,
+                  "totalFemale":0,
+                  "totalGuest":0,
+                  "totalDog":0,
+                  "reserves": []
+                });
               };
               let date1 = new Date();
               let dateCheckin = new Date();
@@ -43,6 +56,12 @@ export const useReserves = () => {
                     target.reserves.push({...reserve});
                     if(reserve.男.value == "") reserve.男.value = "0";
                     target.totalMale += parseInt(reserve.男.value,10);
+                    if(reserve.女.value == "") reserve.女.value = "0";
+                    target.totalFemale += parseInt(reserve.女.value,10);
+                    if(reserve.合計人数.value == "") reserve.合計人数.value = "0";
+                    target.totalGuest += parseInt(reserve.合計人数.value,10);
+                    if(reserve.犬.value == "") reserve.犬.value = "0";
+                    target.totalDog += parseInt(reserve.犬.value,10);
                   }
                 });
                 for(let i=0;i<dateSa; i++){
@@ -57,6 +76,12 @@ export const useReserves = () => {
                       target.reserves.push({...reserve});
                       if(reserve.男.value == "") reserve.男.value = "0";
                       target.totalMale += parseInt(reserve.男.value,10);
+                      if(reserve.女.value == "") reserve.女.value = "0";
+                      target.totalFemale += parseInt(reserve.女.value,10);
+                      if(reserve.合計人数.value == "") reserve.合計人数.value = "0";
+                      target.totalGuest += parseInt(reserve.合計人数.value,10);
+                      if(reserve.犬.value == "") reserve.犬.value = "0";
+                      target.totalDog += parseInt(reserve.犬.value,10);
                     }
                   });
                 };
