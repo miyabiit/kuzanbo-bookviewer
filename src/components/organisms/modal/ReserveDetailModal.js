@@ -15,7 +15,6 @@ import {
   Flex,
   Box,
   Checkbox,
-  Spacer,
   Divider
 } from "@chakra-ui/react";
 

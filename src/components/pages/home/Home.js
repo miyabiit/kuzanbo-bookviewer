@@ -8,31 +8,21 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Center,
-  Spinner,
-  Wrap,
-  WrapItem,
   VStack,
   StackDivider,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
+import { DatePicker } from "chakra-ui-date-input";
 
 import { useReserves } from "../../../hooks/useReserves";
 import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
-import { DatePicker } from "chakra-ui-date-input";
+import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
   
-   const formatDate = (dt) => {
+  const formatDate = (dt) => {
     var y = dt.getFullYear();
     var m = ('00' + (dt.getMonth()+1)).slice(-2);
     var d = ('00' + dt.getDate()).slice(-2);
@@ -57,15 +47,14 @@ export const Home = memo(() => {
   return(
     <>
       <div>
-      <DatePicker
-        placeholder={startDate}
-        name="pickedDate"
-        dateFormat="YYYY-MM-DD"
-        //onChange={(pickedDate) => onChangeDate(pickedDate)}
-        onChange={(pickedDate) => setStartDate(pickedDate)}
-      />
+        <DatePicker
+          placeholder={startDate}
+          name="pickedDate"
+          dateFormat="YYYY-MM-DD"
+          onChange={(pickedDate) => setStartDate(pickedDate)}
+        />
       </div>
-      <Accordion　allowMultiple>
+      <Accordion allowMultiple>
         {reserveSummary.map((obj,index) => (
           <AccordionItem key={index}>
             <h2>
@@ -90,21 +79,10 @@ export const Home = memo(() => {
               >
                 {obj.reserves.map((reserve,index) => (
                   <Flex key={index}>
-                    <Box p='1'>
-                      {reserve.宿泊者名.value}
-                    </Box>
-                    <Box p='1'>
-                      {reserve.status}
-                    </Box>
-                    <Box p='1'>
-                      部屋{reserve.宿泊タイプ.value}
-                    </Box>
-                    <Spacer />
-                    <Box>
-                      <Button onClick={() => onClickReserve(reserve)} colorScheme='teal' mr='1'>
-                        詳細
-                      </Button>
-                    </Box>
+                    <ReserveRaw
+                      reserve={reserve}
+                      onClick={onClickReserve}
+                    />
                   </Flex>
                 ))}
               </VStack>
