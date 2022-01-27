@@ -18,6 +18,7 @@ import { DatePicker } from "chakra-ui-date-input";
 import { useReserves } from "../../../hooks/useReserves";
 import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
 import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
+import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
@@ -59,15 +60,7 @@ export const Home = memo(() => {
           <AccordionItem key={index}>
             <h2>
               <AccordionButton>
-                <Box flex='1' textAlign='left'>
-                  日付:{obj.date.toDateString()}
-                </Box>
-                <Box flex='1' textAlign='left'>
-                  予約数:{obj.reserves.length}
-                </Box>
-                <Box flex='1' textAlign='left'>
-                  男性:{obj.totalMale}
-                </Box>
+                <ReserveSummaryRaw  summary={obj} />
                 <AccordionIcon />
               </AccordionButton>
             </h2>

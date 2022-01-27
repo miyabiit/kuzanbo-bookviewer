@@ -1,6 +1,5 @@
-import { memo, useState, useEffect } from 'react';
+import { memo } from 'react';
 import {
-  Flex,
   Box,
   Spacer,
   Button
