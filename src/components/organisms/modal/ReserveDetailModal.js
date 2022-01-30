@@ -3,6 +3,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Textarea,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -22,13 +23,13 @@ import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
 export const ReserveDetailModal = memo(props => {
   const {isOpen, onClose, isAdmin = false, reserve } = props;
-  
+
   const [name, setName] = useState("");
   const [villa, setVilla] = useState("未決定");
   const [diamond, setDiamond] = useState(false);
   const [repeater, setRepeater] = useState(false);
   const [noDogfee, setNoDogfee] = useState(false);
-  
+
   useEffect(() => {
     setName(reserve.宿泊者名?.value ?? "");
     setVilla(reserve.宿泊タイプ?.value ?? "未決定");
@@ -36,13 +37,13 @@ export const ReserveDetailModal = memo(props => {
     setRepeater((reserve.リピーター?.value[0] ? true : false));
     setNoDogfee((reserve.犬料金?.value[0] ? true : false));
   }, [reserve]);
-  
+
   const onChangeVilla = (e) => setVilla(e.target.value);
-  
+
   const onClickUpdate = () => {
     console.log(villa);
   }
-  
+
   return(
     <Modal
       isOpen={isOpen}
@@ -67,13 +68,13 @@ export const ReserveDetailModal = memo(props => {
                 </Box>
                 <Box pl={2}>
                   <VStack align="left">
-                  <Checkbox 
+                  <Checkbox
                     isChecked={ diamond }
                     isReadOnly={!isAdmin}
                   >
                   ダイヤモンド
                   </Checkbox>
-                  <Checkbox 
+                  <Checkbox
                     isChecked={ repeater }
                     isReadOnly={!isAdmin}
                   >
@@ -328,14 +329,14 @@ export const ReserveDetailModal = memo(props => {
                     isReadOnly={!isAdmin}
                   />
                 </Box>
-                <Box pr={2}>
-                  <FormLabel>コメント</FormLabel>
-                  <Input
-                    value={reserve.コメント?.value ?? ""}
-                    isReadOnly={!isAdmin}
-                  />
-                </Box>
               </Flex>
+              <Box pr={2}>
+                <FormLabel>コメント</FormLabel>
+                <Textarea
+                  value={reserve.コメント?.value ?? ""}
+                  isReadOnly={!isAdmin}
+                />
+              </Box>
             </FormControl>
           </Stack>
         </ModalBody>

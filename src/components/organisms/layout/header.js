@@ -14,12 +14,13 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
+import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header = memo(() => {
   const navigate = useNavigate();
   const onClickHome = useCallback(() => navigate("/home"), []);
   const onClickMenu = useCallback(() => navigate("/menus"), []);
-  const onClickLogiout = useCallback(() => navigate("/"), []);
+  const onClickLogout = useCallback(() => navigate("/"), []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -49,28 +50,19 @@ export const Header = memo(() => {
             <Link onClick={onClickMenu}>食事</Link>
           </Box>
           <Box p={4}>
-            <Link onClick={onClickLogiout}>ログアウト</Link>
+            <Link onClick={onClickLogout}>ログアウト</Link>
           </Box>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
-      <Drawer placement="left" size="xs" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay>
-          <DrawerContent>
-            <DrawerBody p={0} bg="gray.100">
-              <Button onClick={onClickHome} w="100%">
-                予約
-              </Button>
-              <Button onClick={onClickMenu} w="100%">
-                食事
-              </Button>
-              <Button onClick={onClickLogiout} w="100%">
-                ログアウト
-              </Button>
-            </DrawerBody>
-          </DrawerContent>
-        </DrawerOverlay>
-      </Drawer>
+      <MenuDrawer
+        isOpen={isOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+        onClickHome={onClickHome}
+        onClickMenu={onClickMenu}
+        onCLickLogout={onClickLogout}
+      />
     </>
   );
 });
