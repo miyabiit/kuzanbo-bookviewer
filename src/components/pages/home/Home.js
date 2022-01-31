@@ -1,8 +1,6 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import {
-  Box,
   Flex,
-  Spacer,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -10,7 +8,6 @@ import {
   AccordionIcon,
   VStack,
   StackDivider,
-  Button,
   useDisclosure,
 } from '@chakra-ui/react';
 import { DatePicker } from "chakra-ui-date-input";
@@ -22,20 +19,20 @@ import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
 
 export const Home = memo(() => {
   const { getReserves, loading, reserves, reserveSummary } = useReserves();
-  
+
   const formatDate = (dt) => {
     var y = dt.getFullYear();
     var m = ('00' + (dt.getMonth()+1)).slice(-2);
     var d = ('00' + dt.getDate()).slice(-2);
     return (y + '-' + m + '-' + d);
   };
-  
+
   const [startDate, setStartDate] = useState(formatDate(new Date()));
-  
+
   useEffect(() => {
     getReserves(startDate);
   },[getReserves,startDate]);
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectReserve, setSelectReserve] = useState([]);
 
@@ -44,7 +41,7 @@ export const Home = memo(() => {
       setSelectReserve(reserve);
       onOpen();
   },[onClickReserve]);
-  
+
   return(
     <>
       <div>
@@ -66,8 +63,7 @@ export const Home = memo(() => {
             </h2>
             <AccordionPanel pb={4}>
               <VStack
-                divider={<StackDivider/>}
-                spacing={4}
+                spacing={0.5}
                 align='stretch'
               >
                 {obj.reserves.map((reserve,index) => (
