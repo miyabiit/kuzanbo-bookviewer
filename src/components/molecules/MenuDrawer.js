@@ -16,8 +16,7 @@ export const MenuDrawer = memo(props => {
     isOpen,
     onClose,
     onClickHome,
-    onClickMenu,
-    onClickLogout
+    onClickMenu
   } = props;
 
   return (
@@ -35,9 +34,6 @@ export const MenuDrawer = memo(props => {
               </Button>
               <Button onClick={onClickMenu}>
                 食事
-              </Button>
-              <Button onClick={onClickLogout}>
-                LOGOUT
               </Button>
             </Stack>
           </DrawerBody>

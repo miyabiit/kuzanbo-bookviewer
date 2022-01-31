@@ -1,16 +1,15 @@
 import { IconButton, Icon } from "@chakra-ui/react";
-import { BiMenu } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 
-export const MenuIconButton = (props) => {
-  const { onOpen } = props;
+export const LogoutIconButton = (props) => {
+  const { onClick } = props;
   return (
     <IconButton
-      //size="sm"
-      icon={<Icon as={BiMenu} />}
+      icon={<Icon as={BiLogOut} />}
       variant="unstyled"
       display={{ base: "block", md: "none" }}
       //display={{ base: "block"}}
-      onClick={onOpen}
+      onClick={onClick}
     />
   );
 };

@@ -1,19 +1,16 @@
 import { memo, useCallback } from "react";
 import {
   Flex,
+  Spacer,
   Box,
   Link,
   useDisclosure,
   Heading,
-  Drawer,
-  Button,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerBody
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
+import { LogoutIconButton } from "../../atoms/button/LogoutIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header = memo(() => {
@@ -53,6 +50,8 @@ export const Header = memo(() => {
             <Link onClick={onClickLogout}>ログアウト</Link>
           </Box>
         </Flex>
+        <Spacer />
+        <LogoutIconButton onClick={onClickLogout} />
         <MenuIconButton onOpen={onOpen} />
       </Flex>
       <MenuDrawer
@@ -61,7 +60,6 @@ export const Header = memo(() => {
         isOpen={isOpen}
         onClickHome={onClickHome}
         onClickMenu={onClickMenu}
-        onCLickLogout={onClickLogout}
       />
     </>
   );
