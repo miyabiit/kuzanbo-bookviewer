@@ -10,7 +10,8 @@ import {
   StackDivider,
   useDisclosure,
 } from '@chakra-ui/react';
-import { DatePicker } from "chakra-ui-date-input";
+//import { DatePicker } from "chakra-ui-date-input";
+import { DatePicker } from '../../atoms/DatePicker';
 
 import { useReserves } from "../../../hooks/useReserves";
 import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
