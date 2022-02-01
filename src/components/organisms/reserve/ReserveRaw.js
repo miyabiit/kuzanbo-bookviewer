@@ -7,7 +7,9 @@ import {
   HStack,
   VStack,
   Stack,
-  Avatar
+  Avatar,
+  Wrap,
+  WrapItem
 } from '@chakra-ui/react';
 
 export const ReserveRaw = memo( props => {
@@ -56,7 +58,7 @@ export const ReserveRaw = memo( props => {
       p='1'
       m='1'
       borderWidth='1px'
-      borderRadiuss='lg'
+      borderRadius='lg'
     >
       <VStack>
         <Flex w='100%'>
@@ -70,18 +72,26 @@ export const ReserveRaw = memo( props => {
           </Box>
         </Flex>
         <HStack w='100%' p='1' m='1'>
+	  <Wrap>
+	  <WrapItem>
           <Box p='1' w='100px' align='left' fontWeight='bold'>
             {villa}
           </Box>
           <Box p='1' fontWeight='semibold' w='100px' align='left'>
             {totalGuest}名&nbsp;&nbsp;大{totalMale + totalFemale}&bull;子{totalGuest - totalMale - totalFemale}
           </Box>
+	  </WrapItem>
+	  <WrapItem>
           <Box p='1' fontWeight='semibold' w='200px' align='left'>
             夕&nbsp;&nbsp;{dinner}&nbsp;&bull;&nbsp;{dinnerQty}
           </Box>
+	  </WrapItem>
+	  <WrapItem>
           <Box p='1' fontWeight='semibold' w='300px' align='left'>
             朝&nbsp;{`${breakfast}`}
           </Box>
+	  </WrapItem>
+	  </Wrap>
           <Spacer />
           <Button onClick={() => onClick(reserve)} colorScheme='teal' mr='1'>
             詳細

@@ -21,8 +21,8 @@ export const ReserveSummaryRaw = memo( props => {
         <Box align='left' w="30px">
           {('  ' + String(summary.reserves.length)).slice(-2)}
         </Box>
-        <Box align='left' w="90px">
-          {`総人数 ${('  ' + String(summary.totalGuest)).slice(-2)} `}
+        <Box align='right' w="40px">
+          {('  ' + String(summary.totalGuest)).slice(-2)}人
         </Box>
         <Icon as={FaMale}/>
         <Box align='left' w="30px">
