@@ -87,7 +87,7 @@ export const ReserveRaw = memo( props => {
           </Box>
 	  </WrapItem>
 	  <WrapItem>
-          <Box p='1' fontWeight='semibold' w='300px' align='left'>
+          <Box p='1' fontWeight='semibold' w='200px' align='left'>
             朝&nbsp;{`${breakfast}`}
           </Box>
 	  </WrapItem>

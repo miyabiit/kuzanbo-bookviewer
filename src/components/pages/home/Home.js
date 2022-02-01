@@ -7,8 +7,8 @@ import {
   AccordionPanel,
   AccordionIcon,
   VStack,
-  StackDivider,
   useDisclosure,
+  Box
 } from '@chakra-ui/react';
 //import { DatePicker } from "chakra-ui-date-input";
 import { DatePicker } from '../../atoms/DatePicker';
@@ -56,16 +56,14 @@ export const Home = memo(() => {
       <Accordion allowMultiple>
         {reserveSummary.map((obj,index) => (
           <AccordionItem key={index}>
-            <h2>
-              <AccordionButton>
+            <Box as='h2' p='0' m='0' align='left'>
+              <AccordionButton p='0' m='0' align='left'>
                 <ReserveSummaryRaw summary={obj} />
-                <AccordionIcon />
+                <AccordionIcon m='2' />
               </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
+            </Box>
+            <AccordionPanel p='1'>
               <VStack
-                spacing={0.5}
-                align='stretch'
               >
                 {obj.reserves.map((reserve,index) => (
                   <Flex key={index}>

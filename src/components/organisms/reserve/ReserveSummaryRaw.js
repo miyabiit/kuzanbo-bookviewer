@@ -12,7 +12,7 @@ export const ReserveSummaryRaw = memo( props => {
   const dayString = ['日','月','火','水','木','金','土'];
 
   return (
-    <Box flex="1" align="left" boxShadow='base' rounded='md' m='1' p='2'>
+    <Box flex="1" align="left" boxShadow='base' rounded='md' m='1' p='1'>
       <HStack>
         <Box textAlign='left' w="40px">
           {('00' + String(summary.date.getDate())).slice(-2) + ' ' + dayString[summary.date.getDay()]}
@@ -21,7 +21,7 @@ export const ReserveSummaryRaw = memo( props => {
         <Box align='left' w="30px">
           {('  ' + String(summary.reserves.length)).slice(-2)}
         </Box>
-        <Box align='right' w="40px">
+        <Box align='right' w="35px">
           {('  ' + String(summary.totalGuest)).slice(-2)}人
         </Box>
         <Icon as={FaMale}/>
