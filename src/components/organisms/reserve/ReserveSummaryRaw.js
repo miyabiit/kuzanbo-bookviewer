@@ -1,11 +1,10 @@
 import { memo } from 'react';
 import {
   Box,
-  Text,
   HStack,
   Icon
 } from '@chakra-ui/react';
-import {FaHotel, FaMale, FaFemale, FaChild, FaDog} from 'react-icons/fa';
+import {FaHotel, FaMale, FaChild, FaDog} from 'react-icons/fa';
 
 export const ReserveSummaryRaw = memo( props => {
   const {summary} = props;

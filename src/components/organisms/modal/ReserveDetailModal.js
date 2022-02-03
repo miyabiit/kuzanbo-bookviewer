@@ -42,7 +42,7 @@ export const ReserveDetailModal = memo(props => {
 
   const onClickUpdate = () => {
     console.log(villa);
-  }
+  };
 
   return(
     <Modal
@@ -186,28 +186,28 @@ export const ReserveDetailModal = memo(props => {
               </Flex>
               <Flex align="center">
                 <Box pr={2}>
-                  <FormLabel>幼児　食事・寝具あり</FormLabel>
+                  <FormLabel>幼児 食事・寝具あり</FormLabel>
                   <Input
                     value={reserve.幼児_食事_寝具あり?.value ?? "0"}
                     isReadOnly={!isAdmin}
                   />
                 </Box>
                 <Box pr={2}>
-                  <FormLabel>幼児　食事なし・寝具あり</FormLabel>
+                  <FormLabel>幼児 食事なし・寝具あり</FormLabel>
                   <Input
                     value={reserve.幼児_食事なし_寝具あり?.value ?? "0"}
                     isReadOnly={!isAdmin}
                   />
                 </Box>
                 <Box pr={2}>
-                  <FormLabel>幼児　食事あり・寝具なし</FormLabel>
+                  <FormLabel>幼児 食事あり・寝具なし</FormLabel>
                   <Input
                     value={reserve.幼児_食事あり_寝具なし?.value ?? "0"}
                     isReadOnly={!isAdmin}
                   />
                 </Box>
                 <Box pr={2}>
-                  <FormLabel>幼児　食事・寝具なし</FormLabel>
+                  <FormLabel>幼児 食事・寝具なし</FormLabel>
                   <Input
                     value={reserve.幼児_食事_寝具なし?.value ?? "0"}
                     isReadOnly={!isAdmin}

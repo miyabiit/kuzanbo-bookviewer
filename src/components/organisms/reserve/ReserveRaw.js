@@ -6,11 +6,11 @@ import {
   Button,
   HStack,
   VStack,
-  Stack,
   Avatar,
   Wrap,
   WrapItem
 } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
 
 export const ReserveRaw = memo( props => {
   const {reserve, onClick} = props;
@@ -21,12 +21,15 @@ export const ReserveRaw = memo( props => {
   const [totalGuest, setTotalGuest] = useState(0);
   const [totalMale, setTotalMale] = useState(0);
   const [totalFemale, setTotalFemale] = useState(0);
+  const [star, setStar] = useState(false);
 
   useEffect(() => {
     if(reserve.合計人数.value) setTotalGuest(Number(reserve.合計人数.value));
     if(reserve.男.value) setTotalMale(Number(reserve.男.value));
     if(reserve.女.value) setTotalFemale(Number(reserve.女.value));
     if(reserve.宿泊タイプ.value) setVilla(reserve.宿泊タイプ.value);
+    if(reserve.ダイヤモンド会員?.value[0]) setStar(true);
+    if(reserve.リピーター?.value[0]) setStar(true);
 
     let bf = [];
     if(reserve.status == 'CHECKIN'){
@@ -62,9 +65,9 @@ export const ReserveRaw = memo( props => {
     >
       <VStack>
         <Flex w='100%'>
-          <Box p='1' as='h4' align='left' fontWeight='semibold' lineHeight='tight'>
+          <Box p='1' as='h4' align='left' valign='center' fontWeight='semibold' lineHeight='tight'>
             <Avatar size='xs' />&nbsp;
-            {reserve.宿泊者名.value}
+            {reserve.宿泊者名.value}&nbsp;&nbsp;{star && <StarIcon color='yellow.300' pb='1'/>} 
           </Box>
           <Spacer />
           <Box p='1' fontSize='md' fontWeight='bold' letterSpacing='wide'>

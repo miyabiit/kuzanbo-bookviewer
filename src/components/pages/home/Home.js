@@ -19,7 +19,7 @@ import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
 import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
 
 export const Home = memo(() => {
-  const { getReserves, loading, reserves, reserveSummary } = useReserves();
+  const { getReserves, loading, reserveSummary } = useReserves();
 
   const formatDate = (dt) => {
     var y = dt.getFullYear();
@@ -84,5 +84,5 @@ export const Home = memo(() => {
         reserve = {selectReserve}
       />
     </>
-  )
+  );
 });
