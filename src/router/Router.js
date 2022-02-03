@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import { Login } from "../components/pages/login/Login";
 import { Home } from "../components/pages/home/Home";
-import { MenuToday } from "../components/pages/home/MenuToday";
+import { MenuDinner } from "../components/pages/home/MenuDinner";
+import { MenuBreakfast } from "../components/pages/home/MenuBreakfast";
 import { Page404 } from "../components/pages/Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 
@@ -19,10 +20,18 @@ export const Router = () => {
         }
       />
       <Route
-        path="/menus"
+        path="/menudinner"
         element={
           <HeaderLayout>
-            <MenuToday />
+            <MenuDinner />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/menubreakfast"
+        element={
+          <HeaderLayout>
+            <MenuBreakfast />
           </HeaderLayout>
         }
       />

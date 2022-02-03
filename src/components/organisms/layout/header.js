@@ -16,7 +16,8 @@ import { MenuDrawer } from "../../molecules/MenuDrawer";
 export const Header = memo(() => {
   const navigate = useNavigate();
   const onClickHome = useCallback(() => navigate("/home"), []);
-  const onClickMenu = useCallback(() => navigate("/menus"), []);
+  const onClickMenuDinner = useCallback(() => navigate("/menudinner"), []);
+  const onClickMenuBreakfast = useCallback(() => navigate("/menubreakfast"), []);
   const onClickLogout = useCallback(() => navigate("/"), []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,7 +45,10 @@ export const Header = memo(() => {
             <Link onClick={onClickHome}>予約</Link>
           </Box>
           <Box p={4}>
-            <Link onClick={onClickMenu}>食事</Link>
+            <Link onClick={onClickMenuDinner}>夕食</Link>
+          </Box>
+          <Box p={4}>
+            <Link onClick={onClickMenuBreakfast}>朝食</Link>
           </Box>
           <Box p={4}>
             <Link onClick={onClickLogout}>ログアウト</Link>
@@ -59,7 +63,8 @@ export const Header = memo(() => {
         onClose={onClose}
         isOpen={isOpen}
         onClickHome={onClickHome}
-        onClickMenu={onClickMenu}
+        onClickMenuDinner={onClickMenuDinner}
+        onClickMenuBreakfast={onClickMenuBreakfast}
       />
     </>
   );
