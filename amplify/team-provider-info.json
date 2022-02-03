@@ -1,29 +1,45 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-kuzanbobookviewer-dev-91717-authRole",
-            "UnauthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-dev-91717-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-dev-91717-authRole",
-            "Region": "ap-northeast-1",
-            "DeploymentBucketName": "amplify-kuzanbobookviewer-dev-91717-deployment",
-            "UnauthRoleName": "amplify-kuzanbobookviewer-dev-91717-unauthRole",
-            "StackName": "amplify-kuzanbobookviewer-dev-91717",
-            "StackId": "arn:aws:cloudformation:ap-northeast-1:392248044563:stack/amplify-kuzanbobookviewer-dev-91717/c60fdf30-833f-11ec-be48-0eb7fc994d17",
-            "AmplifyAppId": "d3get44rcn5fir"
-        },
-        "categories": {
-            "function": {
-                "getKuzanboBooks": {
-                    "deploymentBucketName": "amplify-kuzanbobookviewer-dev-91717-deployment",
-                    "s3Key": "amplify-builds/getKuzanboBooks-6b7378766d4e4534335a-build.zip"
-                }
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d3get44rcn5fir",
-                    "type": "cicd"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-kuzanbobookviewer-dev-91717-authRole",
+      "UnauthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-dev-91717-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-dev-91717-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-kuzanbobookviewer-dev-91717-deployment",
+      "UnauthRoleName": "amplify-kuzanbobookviewer-dev-91717-unauthRole",
+      "StackName": "amplify-kuzanbobookviewer-dev-91717",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:392248044563:stack/amplify-kuzanbobookviewer-dev-91717/c60fdf30-833f-11ec-be48-0eb7fc994d17",
+      "AmplifyAppId": "d3get44rcn5fir"
+    },
+    "categories": {
+      "function": {
+        "getKuzanboBooks": {
+          "deploymentBucketName": "amplify-kuzanbobookviewer-dev-91717-deployment",
+          "s3Key": "amplify-builds/getKuzanboBooks-6b7378766d4e4534335a-build.zip"
         }
+      },
+      "hosting": {}
     }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-kuzanbobookviewer-staging-74523-authRole",
+      "UnauthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-staging-74523-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::392248044563:role/amplify-kuzanbobookviewer-staging-74523-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-kuzanbobookviewer-staging-74523-deployment",
+      "UnauthRoleName": "amplify-kuzanbobookviewer-staging-74523-unauthRole",
+      "StackName": "amplify-kuzanbobookviewer-staging-74523",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:392248044563:stack/amplify-kuzanbobookviewer-staging-74523/3ec67520-84c5-11ec-9675-0abbdd19c579",
+      "AmplifyAppId": "d3get44rcn5fir"
+    },
+    "categories": {
+      "function": {
+        "getKuzanboBooks": {
+          "deploymentBucketName": "amplify-kuzanbobookviewer-staging-74523-deployment",
+          "s3Key": "amplify-builds/getKuzanboBooks-6b7378766d4e4534335a-build.zip"
+        }
+      }
+    }
+  }
 }
