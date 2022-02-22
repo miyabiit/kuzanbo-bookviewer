@@ -35,7 +35,6 @@ app.get('/books/login/:id', function(req, res) {
   const domain = '0vnjl1ng82s3';
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
   
-  console.log("error:",req.params.id);
   req.query.app=appid;
   req.query.query=`user_id="${req.params.id}"`;
   const config = {
@@ -45,7 +44,6 @@ app.get('/books/login/:id', function(req, res) {
     },
     data: req.query,
   }
-  console.log("get query", req.query);
   axios.get(url, config)
   .then(response => {
     res.json({
@@ -54,7 +52,6 @@ app.get('/books/login/:id', function(req, res) {
     })
   })
   .catch(error => {
-    console.log("res error", error);
     res.json({
       success: false,
       error
@@ -93,6 +90,36 @@ app.get('/books/:date', function(req, res) {
   });
 });
 
+// 予約情報 1件取得 
+app.get('/book/:id', function(req, res) {
+  const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
+  const appid = 9;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/record.json`;
+  
+  req.query.app=appid;
+  req.query.id=req.params.id;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+  axios.get(url, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
 /****************************
 * Example post method *
 ****************************/
