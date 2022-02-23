@@ -1,4 +1,4 @@
 {
-	"httpMethod": "GET",
-	"path": "/isdinners"
+	"httpMethod": "PUT",
+	"path": "/markisdinners/1"
 }

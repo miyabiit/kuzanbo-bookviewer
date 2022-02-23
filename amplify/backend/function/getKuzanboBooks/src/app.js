@@ -156,7 +156,7 @@ app.get('/isdinners', function(req, res) {
   });
 });
 /****************************
-* Example post method *
+* post method *
 ****************************/
 
 app.post('/books', function(req, res) {
@@ -170,8 +170,39 @@ app.post('/books/*', function(req, res) {
 });
 
 /****************************
-* Example put method *
+* put method *
 ****************************/
+
+// 予約情報 夕食展開済に更新 
+app.put('/markisdinners/:id', function(req, res) {
+  const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
+  const appid = 9;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/record.json`;
+  
+  req.body.app=appid;
+  req.body.id=req.params.id;
+	req.body.record = {'isDinners': {value: ['レコード作成済']}}
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    }
+  }
+  axios.put(url, req.body, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
 
 app.put('/books', function(req, res) {
   // Add your code here
