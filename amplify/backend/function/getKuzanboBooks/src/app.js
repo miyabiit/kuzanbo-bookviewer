@@ -120,6 +120,41 @@ app.get('/book/:id', function(req, res) {
     })
   });
 });
+
+// 夕食レコード展開必要な予約レコードID取得
+app.get('/isdinners', function(req, res) {
+  const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
+  const appid = 9;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/records.json`;
+  
+  req.query.app=appid;
+  req.query.query='isDinners not in ("レコード作成済")';
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+  axios.get(url, config)
+  .then(response => {
+		let ids = [];
+		response.data.records.map( (d) => {
+			ids.push(d.$id.value);
+		});
+    res.json({
+      success: true,
+      data: ids 
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
 /****************************
 * Example post method *
 ****************************/
