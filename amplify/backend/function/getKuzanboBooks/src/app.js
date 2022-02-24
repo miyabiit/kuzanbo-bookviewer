@@ -23,7 +23,6 @@ app.use(function(req, res, next) {
   next()
 });
 
-
 /**********************
  * get method *
  **********************/
@@ -91,7 +90,7 @@ app.get('/books/:date', function(req, res) {
 });
 
 // 予約情報 1件取得 
-app.get('/book/:id', function(req, res) {
+app.get('/books/book/:id', function(req, res) {
   const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
   const appid = 9;
   const domain = '0vnjl1ng82s3';
@@ -122,7 +121,7 @@ app.get('/book/:id', function(req, res) {
 });
 
 // 夕食レコード展開必要な予約レコードID取得
-app.get('/isdinners', function(req, res) {
+app.get('/books/isdinners', function(req, res) {
   const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
   const appid = 9;
   const domain = '0vnjl1ng82s3';
@@ -159,14 +158,52 @@ app.get('/isdinners', function(req, res) {
 * post method *
 ****************************/
 
-app.post('/books', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
-
-app.post('/books/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+// 日別夕食レコード作成（1件） 
+// req.value = {
+//   "予約台帳ID": 99, 注）必須
+//   "宿泊日": YYYY-MM-DD,
+//   "夕食": XXXXXXXX,
+//   "夕食数量":99 
+// }
+app.post('/books/setdinners', function(req, res) {
+  const apitoken = 'l5GglupfUlt6yX7jG4SgnTQTPb4wohzxjah0tErn';
+  const appid = 17;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/record.json`;
+  
+  req.body.app=appid;
+  req.value = {
+    "予約台帳ID": 1, 
+    "宿泊日": "2021-9-21",
+    "夕食": "BBQ",
+    "夕食数量": 99 
+	}
+	req.body.record = {
+		"予約台帳ID": {"value": req.value.予約台帳ID},
+		"宿泊日": {"value": req.value.宿泊日},
+		"予約時宿泊棟": {"value": req.value.宿泊棟},
+		"予約時夕食": {"value": req.value.夕食},
+		"夕食数量": {"value" : req.value.夕食数量}
+	}
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    }
+  }
+  axios.post(url, req.body, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
 });
 
 /****************************
@@ -174,7 +211,7 @@ app.post('/books/*', function(req, res) {
 ****************************/
 
 // 予約情報 夕食展開済に更新 
-app.put('/markisdinners/:id', function(req, res) {
+app.put('/books/markisdinners/:id', function(req, res) {
   const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
   const appid = 9;
   const domain = '0vnjl1ng82s3';
@@ -202,16 +239,6 @@ app.put('/markisdinners/:id', function(req, res) {
       error
     })
   });
-});
-
-app.put('/books', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
-});
-
-app.put('/books/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
 });
 
 /****************************

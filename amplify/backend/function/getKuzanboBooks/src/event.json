@@ -1,4 +1,4 @@
 {
-	"httpMethod": "PUT",
-	"path": "/markisdinners/1"
+	"httpMethod": "POST",
+	"path": "/books/setdinners"
 }
