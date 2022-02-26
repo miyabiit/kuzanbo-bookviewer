@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "function": {
+      "getKuzanboBooks": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "api": {
+      "kuzanboapi": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
