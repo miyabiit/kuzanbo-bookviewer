@@ -32,7 +32,7 @@ export const useReserves = () => {
                 "totalDog":0,
                 "reserves": []
               });
-              for(let n = 0; n < 6; n++){
+              for(let n = 0; n < 13; n++){
                 start.setDate(start.getDate()+1);
                 targets.push({"date":new Date(start),
                   "totalMale": 0,
