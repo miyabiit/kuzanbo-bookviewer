@@ -16,7 +16,7 @@ export const useReserves = () => {
   
   const getReserves = useCallback((dateString) => {
       setLoading(true);
-      API.get("kuzanboapi",`/books/${dateString}`)
+      API.get("kuzanboapi",`/books/books/${dateString}`)
       .then(async res => {
           if(res.success){
             if(res.data.records.length > 0){

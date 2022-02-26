@@ -1,4 +1,4 @@
 {
-	"httpMethod": "POST",
-	"path": "/books/setdinners"
+	"httpMethod": "GET",
+	"path": "/books/books/2021-9-20"
 }
