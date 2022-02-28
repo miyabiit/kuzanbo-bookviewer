@@ -66,21 +66,20 @@ app.get('/books/books/:date', function(req, res) {
   const url = `https://${domain}.cybozu.com/k/v1/records.json`;
 	
   const formatDate = (dt) => {
-    var y = dt.getFullYear();
-    var m = ('00' + (dt.getMonth()+1)).slice(-2);
-    var d = ('00' + dt.getDate()).slice(-2);
+    let y = dt.getFullYear();
+    let m = ('00' + (dt.getMonth()+1)).slice(-2);
+    let d = ('00' + dt.getDate()).slice(-2);
     return (y + '-' + m + '-' + d);
   };
-
   let dateFrom = new Date(req.params.date.replace(/-/g,"/"));
-  let dateTo   = new Date();
-	dateTo = dateTo.setDate(dateFrom.getDate() + 14);
+  let dateTo = new Date(req.params.date.replace(/-/g,"/"));
+	dateTo.setDate(dateTo.getDate() + 14);
   const dateFromString = formatDate(dateFrom);
 	const dateToString = formatDate(dateTo);
 
   req.query.app=appid;
   //req.query.query=`チェックイン>="${req.params.date}"`;
-  req.query.query=`チェックイン>="${dateFromString}" and チェックイン<=${dateToString}`;
+  req.query.query=`チェックイン>="${dateFromString}" and チェックイン<="${dateToString}"`;
   const config = {
     headers: {
       'Content-Type': 'application/json',
