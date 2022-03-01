@@ -58,7 +58,7 @@ app.get('/books/login/:id', function(req, res) {
   });
 });
 
-// 予約情報 全件取得
+// 予約情報 全件取得 14days
 app.get('/books/books/:date', function(req, res) {
   const apitoken = 'Wz8X2arEcgJQ7UrLarYhEU9YvyLlytBGKx7f2RSL';
   const appid = 9;
@@ -74,11 +74,10 @@ app.get('/books/books/:date', function(req, res) {
   let dateFrom = new Date(req.params.date.replace(/-/g,"/"));
   let dateTo = new Date(req.params.date.replace(/-/g,"/"));
 	dateTo.setDate(dateTo.getDate() + 14);
-  const dateFromString = formatDate(dateFrom);
+  konst dateFromString = formatDate(dateFrom);
 	const dateToString = formatDate(dateTo);
 
   req.query.app=appid;
-  //req.query.query=`チェックイン>="${req.params.date}"`;
   req.query.query=`チェックイン>="${dateFromString}" and チェックイン<="${dateToString}"`;
   const config = {
     headers: {

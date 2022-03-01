@@ -7,7 +7,8 @@
 Amplify Params - DO NOT EDIT */
 
 const axios = require('axios');
-const url = 'https://vpu55m0twc.execute-api.ap-northeast-1.amazonaws.com/staging' + '/books/login/yamada@kuzanbo.jp';
+const url = `https://${process.env.API_KUZANBOAPI_APIID}.execute-api.${process.env.REGION}.amazonaws.com/${process.env.ENV}`;
+let route = '/books/isdinners';
 const config = {
 	headers: {
 		'Context-Type': 'application/json'
@@ -15,19 +16,18 @@ const config = {
 }
 
 exports.handler = async (event) => {
-	let response = {}
-	await axios.get(url, config)
+	const list = await axios.get(url + route, config)
 	.then(res => {
-		response = {
-			status: true,
-			data: res.data
-		}
+		return res.data;
 	})
-	.catch(err => {
-		response = {
-			status: false,
-			data: err
-		}
+	.catch(err => { return err});
+
+	const  nameList = list.data.map(async (v) => {
+		route = `/books/book/${v}`;
+		const book = await axios.get(url + route, config)
+		.then(res => {return res.data});
+		return book.data.record.宿泊者名.value;
 	});
-	return response;
+	route = '/books/book/1';
+	return nameList;
 };
