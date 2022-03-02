@@ -22,12 +22,14 @@ exports.handler = async (event) => {
 	})
 	.catch(err => { return err});
 
-	const  nameList = list.data.map(async (v) => {
-		route = `/books/book/${v}`;
-		const book = await axios.get(url + route, config)
-		.then(res => {return res.data});
-		return book.data.record.宿泊者名.value;
-	});
-	route = '/books/book/1';
+	const nameList = await Promise.all(
+		list.data.map(async (value) => {
+			route = `/books/book/${value}`;
+			const book = await axios.get(url + route, config)
+				.then(response => {return response.data})
+				.catch(err => {return err});
+			return book.data.record.宿泊者名.value;
+		})
+	);
 	return nameList;
 };
