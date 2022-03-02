@@ -184,12 +184,15 @@ app.post('/books/setdinners', function(req, res) {
   const url = `https://${domain}.cybozu.com/k/v1/record.json`;
   
   req.body.app=appid;
+	/*
   req.value = {
     "予約台帳ID": 1, 
     "宿泊日": "2021-9-21",
+		"宿泊棟": "Po1",
     "夕食": "BBQ",
     "夕食数量": 99 
 	}
+	*/
 	req.body.record = {
 		"予約台帳ID": {"value": req.value.予約台帳ID},
 		"宿泊日": {"value": req.value.宿泊日},
