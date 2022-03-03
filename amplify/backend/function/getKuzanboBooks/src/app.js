@@ -194,11 +194,11 @@ app.post('/books/setdinners', function(req, res) {
 	}
 	*/
 	req.body.record = {
-		"予約台帳ID": {"value": req.value.予約台帳ID},
-		"宿泊日": {"value": req.value.宿泊日},
-		"予約時宿泊棟": {"value": req.value.宿泊棟},
-		"予約時夕食": {"value": req.value.夕食},
-		"夕食数量": {"value" : req.value.夕食数量}
+		"予約台帳ID": {"value": req.body.value.予約台帳ID},
+		"宿泊日": {"value": req.body.value.宿泊日},
+		"予約時宿泊棟": {"value": req.body.value.宿泊棟},
+		"予約時夕食": {"value": req.body.value.夕食},
+		"夕食数量": {"value" : req.body.value.夕食数量}
 	}
   const config = {
     headers: {
