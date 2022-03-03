@@ -38,12 +38,14 @@ const formatDate = (dt) => {
 };
 
 exports.handler = async (event) => {
+	// get reserve data id list for no dinner record create
 	const list = await axios.get(url + route, config)
 	.then(res => {
 		return res.data;
 	})
 	.catch(err => { return err});
 
+	// get reserve datas for no dinner record create
 	const bookList = await Promise.all(
 		list.data.map(async (value) => {
 			route = `/books/book/${value}`;
@@ -54,7 +56,7 @@ exports.handler = async (event) => {
 			return book;
 		})
 	);
-	//const dinnerList = await Promise.all(
+	// create daily dinner records
 	const reserve_ids = [];
 	await Promise.all(
 		bookList.map(async (book) => {
@@ -82,5 +84,17 @@ exports.handler = async (event) => {
 			);
 		})
 	);
-	return reserve_ids;
+
+	//update reserve record that is already dinner records.
+	let success_ids = []
+	const uniq_ids = Array.from(new Set(reserve_ids))
+	await Promise.all(
+		uniq_ids.map(async (id) => {
+			route = `/books/markisdinners/${id}`
+			await axios.put(url + route,config)
+			.then(res => {success_ids.push(id)})
+			.catch(err => {success_ids.push("error")})
+		})
+	);
+	return success_ids
 };
