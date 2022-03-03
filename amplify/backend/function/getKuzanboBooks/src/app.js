@@ -74,7 +74,7 @@ app.get('/books/books/:date', function(req, res) {
   let dateFrom = new Date(req.params.date.replace(/-/g,"/"));
   let dateTo = new Date(req.params.date.replace(/-/g,"/"));
 	dateTo.setDate(dateTo.getDate() + 14);
-  konst dateFromString = formatDate(dateFrom);
+  const dateFromString = formatDate(dateFrom);
 	const dateToString = formatDate(dateTo);
 
   req.query.app=appid;
