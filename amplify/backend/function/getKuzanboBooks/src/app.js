@@ -198,6 +198,48 @@ app.get('/books/villas', function(req, res) {
 	});
 });
 
+// 夕食情報 全件取得 14days
+app.get('/books/dinners/:date', function(req, res) {
+  const apitoken = 'l5GglupfUlt6yX7jG4SgnTQTPb4wohzxjah0tErn';
+  const appid = 17;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/records.json`;
+	
+  const formatDate = (dt) => {
+    let y = dt.getFullYear();
+    let m = ('00' + (dt.getMonth()+1)).slice(-2);
+    let d = ('00' + dt.getDate()).slice(-2);
+    return (y + '-' + m + '-' + d);
+  };
+  let dateFrom = new Date(req.params.date.replace(/-/g,"/"));
+  let dateTo = new Date(req.params.date.replace(/-/g,"/"));
+	dateTo.setDate(dateTo.getDate() + 14);
+  const dateFromString = formatDate(dateFrom);
+	const dateToString = formatDate(dateTo);
+
+  req.query.app=appid;
+  req.query.query=`宿泊日>="${dateFromString}" and 宿泊日<="${dateToString}"`;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+  axios.get(url, config)
+  .then(response => {
+    res.json({
+      success: true,
+      data: response.data.records
+    })
+  })
+  .catch(error => {
+    res.json({
+      success: false,
+      error
+    })
+  });
+});
 
 /****************************
 * post method *
