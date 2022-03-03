@@ -166,6 +166,39 @@ app.get('/books/isdinners', function(req, res) {
     })
   });
 });
+
+// 宿泊棟マスタ取得
+app.get('/books/villas', function(req, res) {
+  const apitoken = 'UwgLajdR70EXFHbIdycheSYsanGeAWWN71JoZ18e';
+  const appid = 13;
+  const domain = '0vnjl1ng82s3';
+  const url = `https://${domain}.cybozu.com/k/v1/records.json`;
+	
+	req.query.app=appid;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Cybozu-API-Token': apitoken,
+    },
+    data: req.query,
+  }
+
+	axios.get(url, config)
+	.then(response => {
+		res.json({
+			sucess: true,
+			data: response.data.records
+		})
+	})
+	.catch(error => {
+		res.json({
+			sucess: false,
+			error
+		})
+	});
+});
+
+
 /****************************
 * post method *
 ****************************/
