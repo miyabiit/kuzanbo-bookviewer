@@ -10,39 +10,23 @@ import {
   useDisclosure,
   Box
 } from '@chakra-ui/react';
-//import { DatePicker } from "chakra-ui-date-input";
 import { DatePicker } from '../../atoms/DatePicker';
+import { useDinners } from '../../../hooks/useDinners';
+import myDateCalc from '../../../functions/myDateCalc';
 
-import { useReserves } from "../../../hooks/useReserves";
-import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
-import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
-import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
+//import { useReserves } from "../../../hooks/useReserves";
+//import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
+//import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
+//import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
 
 export const MenuDinner = memo(() => {
-  const { getReserves, loading, reserveSummary } = useReserves();
-
-  const formatDate = (dt) => {
-    var y = dt.getFullYear();
-    var m = ('00' + (dt.getMonth()+1)).slice(-2);
-    var d = ('00' + dt.getDate()).slice(-2);
-    return (y + '-' + m + '-' + d);
-  };
-
-  const [startDate, setStartDate] = useState(formatDate(new Date()));
-
+	const { getDinners, dinners, dinnerSummary } = useDinners(); 
+	const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
   useEffect(() => {
-    getReserves(startDate);
-  },[getReserves,startDate]);
+    getDinners(startDate);
+  },[getDinners,startDate]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectReserve, setSelectReserve] = useState([]);
-
-  const onClickReserve = useCallback(
-    (reserve) => {
-      setSelectReserve(reserve);
-      onOpen();
-  },[onClickReserve]);
-
   return(
     <>
       <div>
@@ -53,36 +37,7 @@ export const MenuDinner = memo(() => {
           onChange={(pickedDate) => setStartDate(pickedDate)}
         />
       </div>
-      <Accordion allowMultiple>
-        {reserveSummary.map((obj,index) => (
-          <AccordionItem key={index}>
-            <Box as='h2' p='0' m='0' align='left'>
-              <AccordionButton p='0' m='0' align='left'>
-                <ReserveSummaryRaw summary={obj} />
-                <AccordionIcon m='2' />
-              </AccordionButton>
-            </Box>
-            <AccordionPanel p='1'>
-              <VStack
-              >
-                {obj.reserves.map((reserve,index) => (
-                  <Flex key={index}>
-                    <ReserveRaw
-                      reserve={reserve}
-                      onClick={onClickReserve}
-                    />
-                  </Flex>
-                ))}
-              </VStack>
-            </AccordionPanel>
-          </AccordionItem>
-        ))}
-      </Accordion>
-      <ReserveDetailModal
-        isOpen = {isOpen}
-        onClose = {onClose}
-        reserve = {selectReserve}
-      />
+			<h1>size:{dinners.length}</h1>
     </>
   );
 });

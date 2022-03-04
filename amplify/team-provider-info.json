@@ -37,7 +37,7 @@
       "function": {
         "getKuzanboBooks": {
           "deploymentBucketName": "amplify-kuzanbobookviewer-staging-74523-deployment",
-          "s3Key": "amplify-builds/getKuzanboBooks-517462684870554c344b-build.zip"
+          "s3Key": "amplify-builds/getKuzanboBooks-6b67424f637a59464e42-build.zip"
         },
         "setMeal": {
           "deploymentBucketName": "amplify-kuzanbobookviewer-staging-74523-deployment",
