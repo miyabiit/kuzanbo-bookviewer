@@ -14,14 +14,10 @@ import { DatePicker } from '../../atoms/DatePicker';
 import { useDinners } from '../../../hooks/useDinners';
 import myDateCalc from '../../../functions/myDateCalc';
 
-//import { useReserves } from "../../../hooks/useReserves";
-//import { ReserveDetailModal } from "../../organisms/modal/ReserveDetailModal";
-//import { ReserveRaw } from "../../organisms/reserve/ReserveRaw";
-//import { ReserveSummaryRaw } from "../../organisms/reserve/ReserveSummaryRaw";
-
 export const MenuDinner = memo(() => {
 	const { getDinners, dinners, dinnerSummary } = useDinners(); 
-	const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
+	//const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
+	const [startDate, setStartDate] = useState('2021-9-6');
   useEffect(() => {
     getDinners(startDate);
   },[getDinners,startDate]);
@@ -38,6 +34,7 @@ export const MenuDinner = memo(() => {
         />
       </div>
 			<h1>size:{dinners.length}</h1>
+			<h1>size:{dinnerSummary.length}</h1>
     </>
   );
 });

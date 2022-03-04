@@ -10,6 +10,15 @@ exports.getDayList = (fromDateString, toDateString) => {
 	return dayList;
 }
 
+exports.getDayListByTerm = (fromDateString, term = 14) => {
+  let fromDate = new Date(fromDateString.replace(/-/g,"/"));
+	let dayList = [];
+	for(let i=0; i<term;i++){
+		dayList.push(formatDate(getAfterDay(fromDate, i)));
+	}
+	return dayList;
+}
+
 exports.getAfterDay = (startDay, nDay) => {
 	return new Date(startDay.setDate(startDay.getDate() + nDay));
 }
