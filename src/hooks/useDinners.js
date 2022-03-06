@@ -54,7 +54,7 @@ export const useDinners = () => {
 		return crossTotal.getCrossTotal(
 			dayList,
 			menuList,
-			arry
+			data
 		);
 	};
 	

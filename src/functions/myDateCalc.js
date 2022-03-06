@@ -4,8 +4,9 @@ exports.getDayList = (fromDateString, toDateString) => {
   let toDate = new Date(toDateString.replace(/-/g, "/"));
   let dateSa = (fromDate - toDate)/86400000;
 	let dayList = [];
-	for(let i=0; i<dateSa;i++){
-		dayList.push(formatDate(getAfterDay(fromDate, i)));
+	dayList.push(exports.formatDate(exports.getAfterDay(fromDate, 0)));
+	for(let i=1; i<dateSa;i++){
+		dayList.push(exports.formatDate(exports.getAfterDay(fromDate, 1)));
 	}
 	return dayList;
 }
@@ -13,8 +14,9 @@ exports.getDayList = (fromDateString, toDateString) => {
 exports.getDayListByTerm = (fromDateString, term = 14) => {
   let fromDate = new Date(fromDateString.replace(/-/g,"/"));
 	let dayList = [];
-	for(let i=0; i<term;i++){
-		dayList.push(formatDate(getAfterDay(fromDate, i)));
+	dayList.push(exports.formatDate(exports.getAfterDay(fromDate, 0)));
+	for(let i=1; i<term;i++){
+		dayList.push(exports.formatDate(exports.getAfterDay(fromDate, 1)));
 	}
 	return dayList;
 }

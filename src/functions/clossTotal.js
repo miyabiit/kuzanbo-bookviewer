@@ -4,7 +4,7 @@ exports.getUniqList = (array) => {
 
 // colList1, colList2 : クロス集計の軸
 // arr : [[colname1, colname2, value],....]
-exports.getCrossTotal = (clList, rlList, arr) => {
+exports.getCrossTotal = (cList, rList, arr) => {
 	const outArr = [];
 	cList.map(c => {
 		rList.map(r => {
