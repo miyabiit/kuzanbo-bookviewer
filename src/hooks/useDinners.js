@@ -19,6 +19,7 @@ export const useDinners = () => {
 	const [loading, setLoading] = useState(false);
 	const [dinners, setDinners] = useState([]);
 	const [dinnerSummary, setDinnerSummary] = useState([]);
+	const [dinnerTotal, setDinnerTotal] = useState([]);
 
 	// kintone_records to dinners
  	// dinner [予約台帳ID, 予約者、宿泊日、宿泊棟、夕食メニュー、人数]
@@ -49,10 +50,24 @@ export const useDinners = () => {
 		let menuList = dinners.map((d) => {return d[4]});
 		menuList = crossTotal.getUniqList(menuList);
 		let data = dinners.map(d => {
-			return [d[2],d[4],d[5]];
+			return [d[2],d[4],Number(d[5])];
 		});
 		return crossTotal.getCrossTotal(
 			dayList,
+			menuList,
+			data
+		);
+	};
+	// dinnersの集計
+	// dinnerTotal = [[menu1,qty1],[menu2,qty2],....]
+	// term max 14 days
+	const calcDinnersTotal = (dinners, term) => {
+		let menuList = dinners.map((d) => {return d[4]});
+		menuList = crossTotal.getUniqList(menuList);
+		let data = dinners.map(d => {
+			return [d[4],Number(d[5])];
+		});
+		return crossTotal.getTotal(
 			menuList,
 			data
 		);
@@ -67,11 +82,13 @@ export const useDinners = () => {
           showMessage({title:"夕食がありません", status:"info"});
 				}else{
 					setDinners(makeDinnerRecord(res.data));
-					const sum = calcDinners(res.data,dateString,14)
-					setDinnerSummary(
-						sum
-						//calcDinners(res.data,dateString,14)
-					);
+					setDinnerSummary(calcDinners(
+						makeDinnerRecord(res.data),
+						dateString,
+						14));
+					setDinnerTotal(calcDinnersTotal(
+						makeDinnerRecord(res.data),
+						14));
 				}
 			}else{
         showMessage({title:"夕食情報の取得に失敗しました", status:"error"});
@@ -80,5 +97,5 @@ export const useDinners = () => {
     .catch((err) => showMessage({title:"通信に失敗しました", status:"error"}))
 		.finally(() => setLoading(false));
 	},[]);
-	return {getDinners, loading, dinners, dinnerSummary };
+	return {getDinners,loading,dinners,dinnerSummary,dinnerTotal};
 }

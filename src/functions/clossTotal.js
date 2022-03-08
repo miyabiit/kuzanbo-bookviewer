@@ -19,3 +19,19 @@ exports.getCrossTotal = (cList, rList, arr) => {
 	})
 	return outArr;
 }
+// cList : 集計の軸
+// arr : [[colname, value],....]
+// out : [[colname, total],....]
+exports.getTotal = (cList, arr) => {
+	const outArr = [];
+	cList.map(c => {
+	  const res = arr.filter(a => a[0] == c);
+	  if(res.length == 0){
+	    outArr.push([c,0]);
+	  }else{
+	    let total = res.reduce((sum, el) => sum + el[1],0);
+	    outArr.push([c,total]);
+	  }
+	})
+	return outArr;
+}

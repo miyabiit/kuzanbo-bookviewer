@@ -17,14 +17,14 @@ import myDateCalc from '../../../functions/myDateCalc';
 import crossTotal from '../../../functions/clossTotal';
 
 export const MenuDinner = memo(() => {
-	const { getDinners, dinners, dinnerSummary } = useDinners(); 
-	//const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
-	const [startDate, setStartDate] = useState("2021-9-8");
+	const { getDinners, dinners, dinnerSummary,dinnerTotal } = useDinners(); 
+	const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
   useEffect(() => {
     getDinners(startDate);
   },[getDinners,startDate]);
 
 	const onTestClick = () => {
+		/*
 		const calcDinners = (dinners, fromDateString, term) => {
 			let dayList = myDateCalc.getDayListByTerm(
 				fromDateString, 
@@ -45,7 +45,8 @@ export const MenuDinner = memo(() => {
 			return out;
 		};
 		const out = calcDinners(dinners, startDate, 14);
-		alert(out);
+		*/
+		alert(dinnerTotal);
 	}
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -61,6 +62,7 @@ export const MenuDinner = memo(() => {
       </div>
 			<h1>size:{dinners.length}</h1>
 			<h1>size:{dinnerSummary.length}</h1>
+			<h1>size:{dinnerTotal.length}</h1>
 			<Button onClick={() => onTestClick()} >TEST</Button>
     </>
   );
