@@ -24,8 +24,8 @@ export const useDinners = () => {
  	// dinner [予約台帳ID, 予約者、宿泊日、宿泊棟、夕食メニュー、人数]
 	const makeDinnerRecord = (dinner_records) => {
 		const arr = dinner_records.map((d) => {
-			let dinner_name = (d.夕食.value ?? d.予約時夕食.value);
-			let villa_name = (d.宿泊棟.value ?? d.予約時宿泊棟.value);
+			let dinner_name = d.夕食.value || d.予約時夕食.value;
+			let villa_name = d.宿泊棟.value || d.予約時宿泊棟.value;
 			return [
 				d.予約台帳ID.value,
 				d.予約者.value,
@@ -42,13 +42,13 @@ export const useDinners = () => {
 	// dinnerSummary = [日付,[menu1,qty1],[menu2,qty2],....]
 	// term max 14 days
 	const calcDinners = (dinners, fromDateString, term) => {
-		const dayList = myDateCalc.getDayListByTerm(
+		let dayList = myDateCalc.getDayListByTerm(
 			fromDateString, 
 			term
 		);
-		const menuList = dinners.map((d) => {return d[4]});
+		let menuList = dinners.map((d) => {return d[4]});
 		menuList = crossTotal.getUniqList(menuList);
-		const data = dinners.map(d => {
+		let data = dinners.map(d => {
 			return [d[2],d[4],d[5]];
 		});
 		return crossTotal.getCrossTotal(
@@ -67,14 +67,17 @@ export const useDinners = () => {
           showMessage({title:"夕食がありません", status:"info"});
 				}else{
 					setDinners(makeDinnerRecord(res.data));
-					setDinnerSummary(calcDinners(dinners,dateString,14));
+					const sum = calcDinners(res.data,dateString,14)
+					setDinnerSummary(
+						sum
+						//calcDinners(res.data,dateString,14)
+					);
 				}
 			}else{
         showMessage({title:"夕食情報の取得に失敗しました", status:"error"});
 			}
 		})
-    //.catch((err) => showMessage({title:"通信に失敗しました", status:"error"}))
-    .catch((err) => showMessage({title:JSON.stringify(err), status:"error"}))
+    .catch((err) => showMessage({title:"通信に失敗しました", status:"error"}))
 		.finally(() => setLoading(false));
 	},[]);
 	return {getDinners, loading, dinners, dinnerSummary };

@@ -25,20 +25,27 @@ export const MenuDinner = memo(() => {
   },[getDinners,startDate]);
 
 	const onTestClick = () => {
-		/*
-		let c = ["a","b","c"];
-		let r = ["x","y"];
-		let d = [
-			["a","x",3],
-			["a","y",2],
-			["a","y",2],
-			["a","y",2]
-		];
-
-		let b = crossTotal.getCrossTotal(c,r,d);
-		*/
-	  let b = myDateCalc.getDayListByTerm("2021-9-8",14);
-		alert(b);
+		const calcDinners = (dinners, fromDateString, term) => {
+			let dayList = myDateCalc.getDayListByTerm(
+				fromDateString, 
+				term
+			);
+			let menuList = dinners.map((d) => {return d[4]});
+			console.log(menuList);
+			menuList = crossTotal.getUniqList(menuList);
+			console.log(menuList);
+			let data = dinners.map(d => {
+				return [d[2],d[4],d[5]];
+			});
+			const out =  crossTotal.getCrossTotal(
+				dayList,
+				menuList,
+				data
+			);
+			return out;
+		};
+		const out = calcDinners(dinners, startDate, 14);
+		alert(out);
 	}
 
   const { isOpen, onOpen, onClose } = useDisclosure();
