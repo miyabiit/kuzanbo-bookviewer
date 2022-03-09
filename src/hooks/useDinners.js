@@ -52,11 +52,16 @@ export const useDinners = () => {
 		let data = dinners.map(d => {
 			return [d[2],d[4],Number(d[5])];
 		});
-		return crossTotal.getCrossTotal(
+		let crossData = crossTotal.getCrossTotal(
 			dayList,
 			menuList,
 			data
 		);
+		let out = dayList.map((day) => {
+			let dinners =  crossData.filter(a => a[0] == day);
+			return { "date": day, "dinners": dinners }
+		});
+		return out;
 	};
 	// dinnersの集計
 	// dinnerTotal = [[menu1,qty1],[menu2,qty2],....]

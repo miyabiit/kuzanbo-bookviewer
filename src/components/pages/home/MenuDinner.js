@@ -9,6 +9,7 @@ import {
   VStack,
   useDisclosure,
   Box,
+	Spacer,
 	Button
 } from '@chakra-ui/react';
 import { DatePicker } from '../../atoms/DatePicker';
@@ -24,28 +25,6 @@ export const MenuDinner = memo(() => {
   },[getDinners,startDate]);
 
 	const onTestClick = () => {
-		/*
-		const calcDinners = (dinners, fromDateString, term) => {
-			let dayList = myDateCalc.getDayListByTerm(
-				fromDateString, 
-				term
-			);
-			let menuList = dinners.map((d) => {return d[4]});
-			console.log(menuList);
-			menuList = crossTotal.getUniqList(menuList);
-			console.log(menuList);
-			let data = dinners.map(d => {
-				return [d[2],d[4],d[5]];
-			});
-			const out =  crossTotal.getCrossTotal(
-				dayList,
-				menuList,
-				data
-			);
-			return out;
-		};
-		const out = calcDinners(dinners, startDate, 14);
-		*/
 		alert(dinnerTotal);
 	}
 
@@ -64,6 +43,27 @@ export const MenuDinner = memo(() => {
 			<h1>size:{dinnerSummary.length}</h1>
 			<h1>size:{dinnerTotal.length}</h1>
 			<Button onClick={() => onTestClick()} >TEST</Button>
+			<VStack>
+				{dinnerTotal.map((d) => (
+					<Flex w='100%'>
+						<Box>{d[0]}</Box>
+						<Spacer/>
+						<Box>{d[1]}</Box>
+					</Flex>
+				))}
+				<Accordion allowMultiple>
+					{dinnerSummary.map((obj, index) => (
+						<AccordionItem key={index}>
+							<Box as='h2' p='0' align='left'>
+								<AccordionButton p='0' m='0' align='left'>
+									{obj.date}:{obj.dinners}
+									<AccordionIcon m='2' />
+								</AccordionButton>
+							</Box>
+						</AccordionItem>
+					))}
+				</Accordion>
+			</VStack>
     </>
   );
 });
