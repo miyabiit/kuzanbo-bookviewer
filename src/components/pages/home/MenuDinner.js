@@ -6,7 +6,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  VStack,
+	Stack,
   useDisclosure,
   Box,
 	Spacer,
@@ -18,17 +18,47 @@ import myDateCalc from '../../../functions/myDateCalc';
 import crossTotal from '../../../functions/clossTotal';
 
 export const MenuDinner = memo(() => {
-	const { getDinners, dinners, dinnerSummary,dinnerTotal } = useDinners(); 
+	const { getDinners, dinners, dinnerSummary, dinnerTotal } = useDinners(); 
 	const [startDate, setStartDate] = useState(myDateCalc.formatDate(new Date()));
   useEffect(() => {
     getDinners(startDate);
   },[getDinners,startDate]);
 
 	const onTestClick = () => {
-		alert(dinnerTotal);
+		alert(dinners);
 	}
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+	const showDinnerToday = (dinnersToday) => {
+		let total = dinnersToday.reduce((sum, el) => sum + el[2],0);
+		if(total > 0){
+			return(
+				dinnersToday.map((d) => (
+					<Flex>
+						<Box> {d[1]} </Box>
+						<Spacer/>
+						<Box> {d[2]} </Box>
+					</Flex>
+				))
+			)
+		}else{
+			return 
+		}
+	}		
+
+	const showDinnerVilla = (dateString) => {
+		let arr = dinners.filter(a => a[2] == dateString).sort((a,b) => a[3] > b[3]);
+		return arr.map(a => (
+			<Flex>
+			<Box w='300px'>{a[3]}</Box>
+			<Box align="left">{a[4]}</Box>
+			<Spacer/>
+			<Box>{a[5]}</Box>
+			</Flex>
+		));
+	}
+			
   return(
     <>
       <div>
@@ -39,11 +69,9 @@ export const MenuDinner = memo(() => {
           onChange={(pickedDate) => setStartDate(pickedDate)}
         />
       </div>
-			<h1>size:{dinners.length}</h1>
-			<h1>size:{dinnerSummary.length}</h1>
-			<h1>size:{dinnerTotal.length}</h1>
 			<Button onClick={() => onTestClick()} >TEST</Button>
-			<VStack>
+			<Box p='1' m='2'>
+				<Stack>
 				{dinnerTotal.map((d) => (
 					<Flex w='100%'>
 						<Box>{d[0]}</Box>
@@ -51,19 +79,31 @@ export const MenuDinner = memo(() => {
 						<Box>{d[1]}</Box>
 					</Flex>
 				))}
+				</Stack>
+			</Box>
+			<Box p='1' m='2' w='100%'>
 				<Accordion allowMultiple>
 					{dinnerSummary.map((obj, index) => (
 						<AccordionItem key={index}>
-							<Box as='h2' p='0' align='left'>
+							<Box as='h2' p='0' m='0' align='left'>
 								<AccordionButton p='0' m='0' align='left'>
-									{obj.date}:{obj.dinners}
-									<AccordionIcon m='2' />
+									<Box p='1' m='1' w='100%'>
+										<Flex>
+											<Box align='left'>{obj.date}</Box>
+										</Flex>
+										{showDinnerToday(obj.dinners)}
+									</Box>
 								</AccordionButton>
 							</Box>
+            	<AccordionPanel p='1'>
+								<Box p='1' m='1'>
+								{showDinnerVilla(obj.date)}
+								</Box>
+							</AccordionPanel>
 						</AccordionItem>
 					))}
 				</Accordion>
-			</VStack>
+			</Box>
     </>
   );
 });
